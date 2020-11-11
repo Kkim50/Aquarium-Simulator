@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Menu.gd" type="Script" id=1]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="FeedButton" type="Button" parent="."]
+margin_left = -25.0
+margin_top = -100.0
+margin_right = 25.0
+margin_bottom = -50.0
+text = "Feed"
+
+[node name="PlayButton" type="Button" parent="."]
+margin_left = 50.0
+margin_top = -25.0
+margin_right = 100.0
+margin_bottom = 25.0
+text = "Play"
+
+[node name="CheckButton" type="Button" parent="."]
+margin_left = -100.0
+margin_top = -25.0
+margin_right = -50.0
+margin_bottom = 25.0
+text = "Check"
+
+[node name="DressButton" type="Button" parent="."]
+margin_left = -25.0
+margin_top = 50.0
+margin_right = 25.0
+margin_bottom = 100.0
+text = "Dress"
+
+[node name="HideTimer" type="Timer" parent="."]
+wait_time = 2.0
+[connection signal="timeout" from="HideTimer" to="." method="_on_HideTimer_timeout"]

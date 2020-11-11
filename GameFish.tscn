@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://GameFish.gd" type="Script" id=1]
+[ext_resource path="res://art/whale_swim0.png" type="Texture" id=2]
+[ext_resource path="res://art/whale_swim1.png" type="Texture" id=3]
+[ext_resource path="res://art/whale_eat1.png" type="Texture" id=4]
+[ext_resource path="res://art/whale_eat0.png" type="Texture" id=5]
+[ext_resource path="res://Hat.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Monocle.tscn" type="PackedScene" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "swim",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "eat",
+"speed": 4.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 65.1023
+height = 65.5854
+
+[node name="GameFish" type="Area2D"]
+scale = Vector2( 0.75, 0.75 )
+gravity_vec = Vector2( 0, 0 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "swim"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -15, 0 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Hat" parent="." instance=ExtResource( 6 )]
+z_index = 1
+
+[node name="Monocle" parent="." instance=ExtResource( 7 )]
+[connection signal="body_entered" from="." to="." method="_on_GameFish_body_entered"]

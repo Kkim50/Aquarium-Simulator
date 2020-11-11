@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Food.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Background.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Fish.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Menu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://QuitMenu.tscn" type="PackedScene" id=6]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+Food = ExtResource( 2 )
+
+[node name="Background" parent="." instance=ExtResource( 3 )]
+
+[node name="Fish" parent="." instance=ExtResource( 4 )]
+z_index = 1
+
+[node name="FishStartingPosition" type="Position2D" parent="."]
+position = Vector2( 500, 250 )
+
+[node name="Menu" parent="." instance=ExtResource( 5 )]
+editor/display_folded = true
+
+[node name="FeedTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="QuitMenu" parent="." instance=ExtResource( 6 )]
+editor/display_folded = true
+[connection signal="input_event" from="Background" to="." method="_on_Background_input_event"]
+[connection signal="pressed" from="Menu/FeedButton" to="." method="_on_FeedButton_pressed"]
+[connection signal="pressed" from="Menu/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Menu/CheckButton" to="." method="_on_CheckButton_pressed"]
+[connection signal="pressed" from="Menu/DressButton" to="." method="_on_DressButton_pressed"]
+[connection signal="timeout" from="FeedTimer" to="." method="_on_FeedTimer_timeout"]
+[connection signal="pressed" from="QuitMenu/YesButton" to="." method="_on_YesButton_pressed"]
+[connection signal="pressed" from="QuitMenu/NoButton" to="." method="_on_NoButton_pressed"]
+
+[editable path="Menu"]
+
+[editable path="QuitMenu"]
